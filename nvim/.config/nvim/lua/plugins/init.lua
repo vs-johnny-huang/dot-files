@@ -17,10 +17,15 @@ return {
     end,
   },
   {
-    "jose-elias-alvarez/null-ls.nvim",
-    event = "VeryLazy",
-    opts = function()
-      return require "configs.null-ls"
+    "stevearc/conform.nvim",
+    event = "BufWritePre",
+    cmd = { "ConformInfo" },
+    config = function()
+      require "configs.conform"
+    end,
+    init = function()
+      -- If you want the formatexpr, here is the place to set it
+      vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
     end,
   },
   {
