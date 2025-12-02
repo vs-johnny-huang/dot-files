@@ -1,15 +1,7 @@
 -- load defaults i.e lua_lsp
 require("nvchad.configs.lspconfig").defaults()
 
+-- to configure lsps further read :h vim.lsp.config
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md
-local lspconfig = require "lspconfig"
-local nvlsp = require "nvchad.configs.lspconfig"
-
-lspconfig.terraform_lsp.setup {}
-lspconfig.tflint.setup {}
-lspconfig.biome.setup {}
-lspconfig.ts_ls.setup {
-  on_attach = nvlsp.on_attach,
-  on_init = nvlsp.on_init,
-  capabilities = nvlsp.capabilities,
-}
+local servers = { "terraform_lsp", "tflint", "biome", "ts_ls", "lua_ls" }
+vim.lsp.enable(servers)

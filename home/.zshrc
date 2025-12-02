@@ -176,9 +176,10 @@ eval "$(zoxide init zsh)"
 
 export PATH=/opt/homebrew/bin:$PATH
 
-. "$HOME/.local/bin/env"
+# . "$HOME/.local/bin/env"
 
-# for claude code
-export CLAUDE_CODE_USE_VERTEX=1
-export CLOUD_ML_REGION=global
-export ANTHROPIC_VERTEX_PROJECT_ID=software-integration-lab
+# for claude code with GCP Vertex AI
+# export CLAUDE_CODE_USE_VERTEX=1
+# export CLOUD_ML_REGION=global
+# export ANTHROPIC_VERTEX_PROJECT_ID=software-integration-lab
+export PATH="$HOME/.local/bin:$PATH"
