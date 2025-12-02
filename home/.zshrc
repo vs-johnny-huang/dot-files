@@ -119,6 +119,9 @@ export NVM_DIR="$HOME/.nvm"
 # place this after nvm initialization!
 autoload -U add-zsh-hook
 
+unsetopt correct_all
+unsetopt correct
+
 load-nvmrc() {
   local nvmrc_path
   nvmrc_path="$(nvm_find_nvmrc)"
@@ -172,3 +175,10 @@ eval "$(zoxide init zsh)"
 # export ORBENV=EDITOR:AWS_ACCESS_KEY_ID:AWS_SECRET_ACCESS_KEY
 
 export PATH=/opt/homebrew/bin:$PATH
+
+. "$HOME/.local/bin/env"
+
+# for claude code
+export CLAUDE_CODE_USE_VERTEX=1
+export CLOUD_ML_REGION=global
+export ANTHROPIC_VERTEX_PROJECT_ID=software-integration-lab
