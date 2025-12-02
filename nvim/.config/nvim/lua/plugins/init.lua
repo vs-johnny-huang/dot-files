@@ -163,4 +163,14 @@ return {
     },
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
+  {
+    "greggh/claude-code.nvim",
+    event = "VeryLazy",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    config = function()
+      require("claude-code").setup()
+    end,
+  },
 }
