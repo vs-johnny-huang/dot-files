@@ -164,13 +164,71 @@ return {
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
   {
-    "greggh/claude-code.nvim",
-    event = "VeryLazy",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
+    "zbirenbaum/copilot.lua",
+    requires = {
+      "copilotlsp-nvim/copilot-lsp", -- (optional) for NES functionality
     },
+    cmd = "Copilot",
+    event = "InsertEnter",
     config = function()
-      require("claude-code").setup()
+      require("copilot").setup {
+        suggestion = {
+          enabled = true,
+          auto_trigger = true,
+        },
+        panel = { enabled = false },
+        copilot_node_command = vim.fn.expand "$HOME" .. "/.nvm/versions/node/v24.11.1/bin/node",
+      }
+    end,
+  },
+  {
+    "zbirenbaum/copilot-cmp",
+    event = "InsertEnter",
+    config = function()
+      require("copilot_cmp").setup()
+    end,
+  },
+  {
+    "hrsh7th/nvim-cmp",
+    dependencies = {
+      {
+        -- snippet plugin
+        "L3MON4D3/LuaSnip",
+        config = function(_, opts)
+          require("luasnip").config.set_config(opts)
+
+          local luasnip = require "luasnip"
+
+          luasnip.filetype_extend("javascriptreact", { "html" })
+          luasnip.filetype_extend("typescriptreact", { "html" })
+          luasnip.filetype_extend("svelte", { "html" })
+
+          require "nvchad.configs.luasnip"
+        end,
+      },
+
+      {
+        "hrsh7th/cmp-cmdline",
+        event = "CmdlineEnter",
+        config = function()
+          local cmp = require "cmp"
+
+          cmp.setup.cmdline("/", {
+            mapping = cmp.mapping.preset.cmdline(),
+            sources = { { name = "buffer" } },
+          })
+
+          cmp.setup.cmdline(":", {
+            mapping = cmp.mapping.preset.cmdline(),
+            sources = cmp.config.sources({ { name = "path" } }, { { name = "cmdline" } }),
+            matching = { disallow_symbol_nonprefix_matching = false },
+          })
+        end,
+      },
+    },
+
+    opts = function(_, opts)
+      table.insert(opts.sources, 1, { name = "copilot" })
     end,
   },
 }

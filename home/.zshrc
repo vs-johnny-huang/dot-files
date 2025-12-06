@@ -107,11 +107,6 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-alias vim="nvim"
-alias ls="eza"
-alias cat="bat"
-alias cd="z"
-
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -152,10 +147,6 @@ case ":$PATH:" in
 esac
 # pnpm end
 
-# for z to auto complete cd path
-# autoload -U compinit; compinit
-# zstyle ':completion:*' menu select
-
 # option + C to cd by fzf in tmux mode
 bindkey "ç" fzf-cd-widget
 
@@ -167,19 +158,18 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-
-# alias awslogin=". ~/aws-login.sh"
 eval "$(zoxide init zsh)"
 
-# or for all proceeding commands
-# export ORBENV=EDITOR:AWS_ACCESS_KEY_ID:AWS_SECRET_ACCESS_KEY
-
-export PATH=/opt/homebrew/bin:$PATH
-
-# . "$HOME/.local/bin/env"
+# export PATH=/opt/homebrew/bin:$PATH
+# export PATH="$HOME/.local/bin:$PATH"
+export PATH="/opt/homebrew/bin:$HOME/.local/bin:$PATH"
 
 # for claude code with GCP Vertex AI
 # export CLAUDE_CODE_USE_VERTEX=1
 # export CLOUD_ML_REGION=global
 # export ANTHROPIC_VERTEX_PROJECT_ID=software-integration-lab
-export PATH="$HOME/.local/bin:$PATH"
+alias vim="nvim"
+alias ls="eza"
+alias cat="bat"
+alias cd="z"
+
